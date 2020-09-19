@@ -40,7 +40,7 @@ I can take the mean of numbers and logical but not character or factor.
 
 Now converting variables to numeric.
 
-```{r try_numeric}
+```{r try_numeric, results= "hide"}
 as.numeric(pull(prob1_df, samp))
 as.numeric(pull(prob1_df, samp_gt_0))
 as.numeric(pull(prob1_df, char_vec))
@@ -51,7 +51,7 @@ as.numeric(pull(prob1_df, factor_vec))
 Character variables cannot be converted to numeric.
 
 
-
+Now, converting the logical variable into numeric or factor and then multiplying it by the random sample 
 
 ```{r convert_logical}
 as.numeric(pull(prob1_df, samp_gt_0))*pull(prob1_df, samp)
@@ -65,8 +65,24 @@ Factors of logical variables cannot be multiplied by numbers
 ## Problem 2
 
 ```{r}
-install.packages("palmerpenguins")
 data("penguins", package = "palmerpenguins")
+penguins
 ```
+ 
+ The Penguins dataset is a summary of information on penguins.  The dataset has `r nrow(penguins)` variables and `r ncol(penguins)` observations. The included variables are: `r names(penguins)`.
+ 
+ The mean flipper length (rounded to the nearest mm) of penguins with nonmissing values in this dataset is `r round(mean(penguins$flipper_length_mm, na.rm = TRUE))` mm
+ 
+Below is a scatterplot comparing flipper length to bill length, color coated by species. 
+
+```{r scatterplot}
+ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species))+geom_point()
+
+ggsave(
+  "p8105_hw1_ma3997.pdf")
+```
+ 
+ 
+
  
  
