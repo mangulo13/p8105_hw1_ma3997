@@ -21,7 +21,7 @@ prob1_df =
     samp = rnorm(10),
     samp_gt_0 = samp > 0,
     char_vec = c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j"),
-    factor_vec = factor(c("low","low","low","mod", "mod", "mod", "mod", "high", "high", "high"))
+    factor_vec = factor(c("low","low","low","med", "med", "med", "med", "high", "high", "high"))
   )
 
 prob1_df
@@ -38,30 +38,35 @@ mean(pull(prob1_df, factor_vec))
 
 I can take the mean of numbers and logical but not character or factor. 
 
+Now converting variables to numeric.
+
 ```{r try_numeric}
 as.numeric(pull(prob1_df, samp))
 as.numeric(pull(prob1_df, samp_gt_0))
 as.numeric(pull(prob1_df, char_vec))
 as.numeric(pull(prob1_df, factor_vec))
+
 ```
 
-```{r}
+Character variables cannot be converted to numeric.
+
+
+
+
+```{r convert_logical}
 as.numeric(pull(prob1_df, samp_gt_0))*pull(prob1_df, samp)
+as.factor(pull(prob1_df, samp_gt_0))*pull(prob1_df, samp)
+as.numeric(as.factor(pull(prob1_df, samp_gt_0)))*pull(prob1_df, samp)
 ```
 
-
-Why don't I like '$'
-
-```{r no_dollars}
-prob1_df$samp
-
-pull(prob1_df, samp)
-
-prob1_df[["samp"]]
-```
-
-Second command is more tidy, after this HW we wont pull or use '$'
-
+Factors of logical variables cannot be multiplied by numbers  
 
 
 ## Problem 2
+
+```{r}
+install.packages("palmerpenguins")
+data("penguins", package = "palmerpenguins")
+```
+ 
+ 
